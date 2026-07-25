@@ -16,6 +16,10 @@ class Config:
         f"{GEMINI_MODEL}:generateContent"
     )
 
+    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    GROQ_URL: str = "https://api.groq.com/openai/v1/chat/completions"
+
     BACKEND_PORT: int = int(os.getenv("BACKEND_PORT", "5000"))
     DEBUG: bool = os.getenv("FLASK_ENV", "production") == "development"
 
@@ -24,7 +28,7 @@ class Config:
 
     @classmethod
     def has_ai_key(cls) -> bool:
-        return bool(cls.GEMINI_API_KEY)
+        return bool(cls.GROQ_API_KEY)
 
 
 config = Config()
