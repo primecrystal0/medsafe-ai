@@ -21,6 +21,8 @@ MAX_IMAGE_DIMENSION = 2000  # px — avoids OOM on huge phone photos
 # Uncomment and adjust this line if you hit a "TesseractNotFoundError":
 # pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
 
 class OCRError(Exception):
     """Raised when OCR cannot produce usable text."""
@@ -94,3 +96,5 @@ def extract_text(image_bytes: bytes) -> str:
 
     logger.info("OCR extracted %d characters", len(cleaned))
     return cleaned
+
+

@@ -2,7 +2,7 @@ flask==3.0.3
 flask-cors==4.0.1
 python-dotenv==1.0.1
 opencv-python-headless==4.10.0.84
-numpy==1.26.4
+numpy>=1.26.4
 pillow==10.4.0
 pytesseract==0.3.13
 pymongo==4.8.0
