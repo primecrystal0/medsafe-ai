@@ -7,6 +7,8 @@ Runs entirely locally — the raw image never leaves this machine.
 """
 import io
 import logging
+import os
+import platform
 
 import cv2
 import numpy as np
@@ -17,11 +19,13 @@ logger = logging.getLogger(__name__)
 
 MAX_IMAGE_DIMENSION = 2000  # px — avoids OOM on huge phone photos
 
-# On Windows, pytesseract usually can't find tesseract.exe automatically.
-# Uncomment and adjust this line if you hit a "TesseractNotFoundError":
-# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# On Windows dev machines, pytesseract usually can't find tesseract.exe
+# automatically. On Linux (e.g. Render via Docker), tesseract is installed
+# via apt and is already on PATH, so no override is needed there.
+if platform.system() == "Windows":
+    default_windows_path = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    if os.path.exists(default_windows_path):
+        pytesseract.pytesseract.tesseract_cmd = default_windows_path
 
 
 class OCRError(Exception):
@@ -96,5 +100,4 @@ def extract_text(image_bytes: bytes) -> str:
 
     logger.info("OCR extracted %d characters", len(cleaned))
     return cleaned
-
 
