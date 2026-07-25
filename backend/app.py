@@ -2,6 +2,7 @@
 Flask API — single endpoint that ties OCR, LLM advice, and DB storage together.
 """
 import logging
+import os
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -61,4 +62,5 @@ def history():
 
 
 if __name__ == "__main__":
-    app.run(port=config.BACKEND_PORT, debug=config.DEBUG)
+    port = int(os.getenv("PORT", config.BACKEND_PORT))
+    app.run(host="0.0.0.0", port=port, debug=config.DEBUG)
