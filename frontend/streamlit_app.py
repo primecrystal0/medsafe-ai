@@ -5,7 +5,7 @@ get interaction advice from the Flask backend.
 import requests
 import streamlit as st
 
-BACKEND_URL = "http://127.0.0.1:5000"
+BACKEND_URL = "https://medsafe-ai-1-qizl.onrender.com"
 
 st.set_page_config(page_title="MedSafer AI", page_icon="💊")
 st.title("💊 MedSafer AI")
